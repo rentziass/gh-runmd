@@ -19,8 +19,6 @@ Maintainers should be able to mark certain blocks as non runnable, for example, 
 ```markdown
 ```bash{runmd=false}
 ```
-```
-```
 
 Users should be able to preview the script and pick which blocks to run.
 
