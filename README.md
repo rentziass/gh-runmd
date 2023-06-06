@@ -23,3 +23,7 @@ Maintainers should be able to mark certain blocks as non runnable, for example, 
 Users should be able to preview the script and pick which blocks to run.
 
 Users should be able to provide both a URL and a local path.
+
+### Questions
+
+Should maintainers be able to specify wait conditions for each block before on to the next one? This can be useful if there's an async setup happening, but it's also a way of running code that is not in plain sight (unless it's a straight up "sleep").
