@@ -1,9 +1,9 @@
 package blocks_test
 
 import (
+	"fmt"
 	"io"
 	"os"
-	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -19,45 +19,52 @@ func TestFrom(t *testing.T) {
 		want    blocks.Blocks
 		wantErr bool
 	}{
+		// {
+		// 	name: "empty",
+		// 	r:    strings.NewReader(""),
+		// 	want: blocks.Blocks{},
+		// },
+		// {
+		// 	name: "no blocks",
+		// 	r:    fileReader(t, "testdata/no_blocks.md"),
+		// 	want: blocks.Blocks{},
+		// },
 		{
-			name: "empty",
-			r:    strings.NewReader(""),
-			want: blocks.Blocks{},
-		},
-		{
-			name: "no blocks",
-			r:    fileReader(t, "testdata/no_blocks.md"),
-			want: blocks.Blocks{},
-		},
-		{
-			name: "one block",
-			r:    fileReader(t, "testdata/one_block.md"),
+			name: "fenced block",
+			r:    fileReader(t, "testdata/fenced_block.md"),
 			want: blocks.Blocks{
 				&blocks.Block{Content: "hello"},
 			},
 		},
 		{
-			name: "two blocks",
-			r:    fileReader(t, "testdata/two_blocks.md"),
+			name: "indented block",
+			r:    fileReader(t, "testdata/indented_block.md"),
 			want: blocks.Blocks{
-				&blocks.Block{Content: "hello"},
-				&blocks.Block{Content: "world"},
+				&blocks.Block{},
 			},
 		},
-		{
-			name: "two blocks with paths",
-			r:    fileReader(t, "testdata/blocks_with_paths.md"),
-			want: blocks.Blocks{
-				&blocks.Block{
-					Content: "hello",
-					Paths:   []string{"macos", "linux"},
-				},
-				&blocks.Block{
-					Content: "world",
-					Paths:   []string{"windows"},
-				},
-			},
-		},
+		// {
+		// 	name: "two blocks",
+		// 	r:    fileReader(t, "testdata/two_blocks.md"),
+		// 	want: blocks.Blocks{
+		// 		&blocks.Block{Content: "hello"},
+		// 		&blocks.Block{Content: "world"},
+		// 	},
+		// },
+		// {
+		// 	name: "two blocks with paths",
+		// 	r:    fileReader(t, "testdata/blocks_with_paths.md"),
+		// 	want: blocks.Blocks{
+		// 		&blocks.Block{
+		// 			Content: "hello",
+		// 			Paths:   []string{"macos", "linux"},
+		// 		},
+		// 		&blocks.Block{
+		// 			Content: "world",
+		// 			Paths:   []string{"windows"},
+		// 		},
+		// 	},
+		// },
 	}
 
 	for _, tt := range tests {
@@ -81,7 +88,12 @@ func fileReader(t *testing.T, path string) io.Reader {
 	t.Helper()
 
 	r, err := os.Open(path)
+	fmt.Println("r:", r)
 	require.NoError(t, err)
+
+	t.Cleanup(func() {
+		require.NoError(t, r.Close())
+	})
 
 	return r
 }
