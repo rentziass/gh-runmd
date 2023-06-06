@@ -23,3 +23,5 @@ Maintainers should be able to mark certain blocks as non runnable, for example, 
 ```
 
 Users should be able to preview the script and pick which blocks to run.
+
+Users should be able to provide both a URL and a local path.
