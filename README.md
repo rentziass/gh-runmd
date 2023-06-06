@@ -2,7 +2,7 @@
 
 This is a hackaton project.
 
-A [gh](https://github.com/cli/cli) extension to run code blocks from markdown files. The goal for this is to make it easier and faster to run setups and examples from README files. The default barebones behaviour should take a repo as an argument, get the README, build one script from all the code blocks and run it.
+A [gh](https://github.com/cli/cli) extension to run code blocks from markdown files. The goal for this is to make it easier and faster to run setups and examples from README files. The default barebones behaviour should take a repo as an argument, get the README, build one script from all the code blocks and run it. This can also be used by maintainers to test their READMEs.
 
 ```bash
 gh runmd your/repo
