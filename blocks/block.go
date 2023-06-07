@@ -1,5 +1,9 @@
 package blocks
 
+import (
+	"golang.org/x/exp/slices"
+)
+
 type Blocks []*Block
 
 type Block struct {
@@ -7,7 +11,15 @@ type Block struct {
 	Paths   []string
 }
 
-func (blocks Blocks) ForPaths(paths ...string) (Blocks, error) {
-	// ...
-	return nil, nil
+func (blocks Blocks) ForPaths(paths ...string) Blocks {
+	var result Blocks
+	for _, block := range blocks {
+		if slices.ContainsFunc(paths, func(path string) bool {
+			return slices.Contains(block.Paths, path)
+		}) {
+			result = append(result, block)
+		}
+	}
+
+	return result
 }
