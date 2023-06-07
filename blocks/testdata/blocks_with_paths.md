@@ -2,10 +2,10 @@
 
 some description
 
-```bash{paths:[macos, linux]}
+```bash{"paths":["macos", "linux"]}
 hello
 ```
 
-```bash{paths:[windows]}
+```bash{"paths":["windows"]}
 world
 ```
