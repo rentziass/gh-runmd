@@ -23,3 +23,12 @@ func (blocks Blocks) ForPaths(paths ...string) Blocks {
 
 	return result
 }
+
+func (blocks Blocks) ToScript() string {
+	var result string
+	for _, block := range blocks {
+		result += block.Content
+	}
+
+	return result
+}
